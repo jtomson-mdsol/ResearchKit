@@ -46,6 +46,9 @@
                 });
             }];
         }
+        
+        if (pendingCount == 0)
+            self.uploading = NO; // nothing was scheduled
     });
     
 }
