@@ -30,7 +30,6 @@
         while ((pendingItem = [self.delegate nextPendingItem])) {
             
             ++pendingCount;
-            [self.delegate itemWasScheduledForUpload:pendingItem];
             
             [self.client uploadItem:pendingItem completionHandler:^ void(id item, id response, NSError *error) {
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -45,6 +44,8 @@
                         [self.delegate item:pendingItem didUploadWithResponse:response];
                 });
             }];
+            
+            [self.delegate itemWasScheduledForUpload:pendingItem];
         }
         
         if (pendingCount == 0)
